@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free online image compression tool to reduce image size without losing quality. Optimise images for SEO and faster websites.">
+  <meta name="keywords" content="image compression, online compressor, image optimizer, seo image tool">
+  <meta name="author" content="YourSiteName">
+  <title>Responsive Image Compression Tool | Optimise Images for SEO</title>
+
+  <!-- Google AdSense Integration -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-XXXXXXXXXXXXXXXX", // Replace with your ID
+      enable_page_level_ads: true
+    });
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+    }
+
+    header {
+      background: #0066cc;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    main {
+      display: grid;
+      place-items: center;
+      padding: 30px 15px;
+    }
+
+    .tool-container {
+      background: #fff;
+      max-width: 600px;
+      width: 100%;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .tool-container h2 {
+      margin-top: 0;
+      font-size: 22px;
+      text-align: center;
+      color: #444;
+    }
+
+    .tool-container p {
+      font-size: 15px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    input[type="file"],
+    select,
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px 15px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border 0.3s ease;
+    }
+
+    input[type="file"]:focus,
+    select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    #output img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .download-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: #28a745;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .download-btn:hover {
+      background: #218838;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .tool-container {
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 22px;
+      }
+
+      .tool-container h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Online Image Compression Tool</h1>
+  </header>
+
+  <main>
+    <div class="tool-container">
+      <h2>Compress Images for SEO</h2>
+      <p>Reduce image file size while maintaining quality. Improve site speed and user experience.</p>
+
+      <input type="file" id="imageInput" accept="image/*" />
+      
+      <label for="quality"><strong>Compression Level</strong></label>
+      <select id="quality">
+        <option value="0.1">10% (Maximum Compression)</option>
+        <option value="0.3">30%</option>
+        <option value="0.5">50%</option>
+        <option value="0.7" selected>70%</option>
+        <option value="0.9">90% (Low Compression)</option>
+      </select>
+
+      <button onclick="compressImage()">Compress & Download</button>
+
+      <div id="output"></div>
+    </div>
+  </main>
+
+  <!-- Optional Ad Block -->
+  <div style="text-align:center; margin-top:30px;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <footer>
+    &copy; 2025 ImageCompressor by YourSiteName. Built for performance and simplicity.
+  </footer>
+
+  <script>
+    function compressImage() {
+      const input = document.getElementById("imageInput");
+      const quality = parseFloat(document.getElementById("quality").value);
+      const output = document.getElementById("output");
+
+      if (!input.files || !input.files[0]) {
+        alert("Please upload an image first.");
+        return;
+      }
+
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            output.innerHTML = `
+              <p><strong>Compressed Image Preview:</strong></p>
+              <img src="${url}" alt="Compressed Image" />
+              <br>
+              <a href="${url}" download="compressed-image.jpg" class="download-btn">Download Image</a>
+            `;
+          }, 'image/jpeg', quality);
+        };
+        img.src = event.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+
+</body>
+</html>

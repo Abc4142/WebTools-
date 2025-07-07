@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online image compression tool. Reduce image size without losing quality. Optimise for SEO with fast-loading images.">
+  <meta name="keywords" content="image compression, SEO image optimisation, compress images online, reduce image size">
+  <meta name="author" content="ImageTool Creator">
+  <title>Free Image Compression Tool - Optimise Images for Web</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e9eef3;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .container h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="file"],
+    input[type="range"] {
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    button {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    #preview {
+      margin-top: 2rem;
+    }
+
+    #preview a {
+      background: #17a2b8;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    #preview a:hover {
+      background: #138496;
+    }
+
+    .adsense {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Free Image Compression Tool</h1>
+    <p>Compress images for faster websites and better SEO</p>
+  </header>
+
+  <main>
+    <!-- Ad Space Top -->
+    <div class="adsense">
+      <!-- Google AdSense Ad Code Insert Below -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-app-pub-5606701367420238-4893549620"
+        data-ad-slot="ca-app-pub-5606701367420238/8341754329"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+      <h2>Select Image and Compression Level</h2>
+      <input type="file" id="imageInput" accept="image/*">
+      <label for="compressionRange">Compression Level: <span id="compressionValue">75</span>%</label>
+      <input type="range" id="compressionRange" min="10" max="100" value="75">
+      <button onclick="compressImage()">Compress & Download</button>
+      <div id="preview"></div>
+    </div>
+
+    <!-- Ad Space Bottom -->
+    <div class="adsense">
+      <!-- Google AdSense Ad Code Insert Below -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-app-pub-5606701367420238-44893549620"
+        data-ad-slot="ca-app-pub-5606701367420238/8341754329"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('compressionRange').addEventListener('input', function () {
+      document.getElementById('compressionValue').textContent = this.value;
+    });
+
+    function compressImage() {
+      const file = document.getElementById('imageInput').files[0];
+      const quality = document.getElementById('compressionRange').value / 100;
+      if (!file) return alert("Please select an image.");
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = url;
+            downloadLink.download = 'compressed-image.jpg';
+            downloadLink.textContent = 'Download Compressed Image';
+
+            const preview = document.getElementById('preview');
+            preview.innerHTML = '';
+            preview.appendChild(downloadLink);
+          }, 'image/jpeg', quality);
+        };
+      };
+    }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+
+</html>

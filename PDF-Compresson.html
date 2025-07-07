@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Compress PDF files online with selectable compression levels. Fast, free, and fully responsive PDF compression tool with SEO optimisation and ad support." />
+  <meta name="keywords" content="PDF compressor, online PDF tool, reduce PDF size, PDF optimisation, compress PDF" />
+  <meta name="author" content="YourSiteName" />
+  <title>Online PDF Compression Tool - Compress PDF Easily</title>
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #f9f9f9;
+      --text-color: #333;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--secondary-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .ad-space {
+      width: 100%;
+      height: 90px;
+      margin: 1.5rem 0;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.9rem;
+      border-radius: 8px;
+    }
+
+    label {
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    #output {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>PDF Compression Tool</h1>
+    <p>Reduce your PDF file size by selecting a compression level</p>
+  </header>
+
+  <div class="container">
+    <div class="ad-space">
+      <!-- Top Ad Unit Placeholder -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-slot="1111111111"
+        data-ad-format="auto"></ins>
+    </div>
+
+    <label for="pdfFile">Select PDF file:</label>
+    <input type="file" id="pdfFile" accept="application/pdf" />
+
+    <label for="compression">Select Compression Level:</label>
+    <select id="compression">
+      <option value="low">Low (Best Quality)</option>
+      <option value="medium">Medium (Balanced)</option>
+      <option value="high">High (Smallest Size)</option>
+    </select>
+
+    <button onclick="compressPDF()">Compress PDF</button>
+
+    <div id="output"></div>
+
+    <div class="ad-space">
+      <!-- Bottom Ad Unit Placeholder -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-slot="2222222222"
+        data-ad-format="auto"></ins>
+    </div>
+  </div>
+
+  <script>
+    async function compressPDF() {
+      const fileInput = document.getElementById("pdfFile");
+      const compressionLevel = document.getElementById("compression").value;
+      const output = document.getElementById("output");
+
+      if (!fileInput.files.length) {
+        alert("Please select a PDF file.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+
+      // Simulated compression logic
+      output.innerHTML = `<p>Compressing PDF at <strong>${compressionLevel}</strong> level...</p>`;
+
+      setTimeout(() => {
+        output.innerHTML = `
+          <p><strong>Compression Complete!</strong> (Simulated)</p>
+          <a href="#" download="compressed_${file.name}" style="color: var(--primary-color); text-decoration: underline;">Download Compressed PDF</a>
+        `;
+      }, 2000);
+    }
+  </script>
+
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+
+</html>
