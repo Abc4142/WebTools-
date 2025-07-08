@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Unique AI-powered tool for converting images into multiple formats with precision optimisation and quality selection. Monetised with AdSense." />
+  <meta name="keywords" content="AI image converter, online image converter, image to WebP JPEG PNG, responsive image tool, AdSense integration" />
+  <meta name="author" content="Your Brand" />
+  <title>Unique AI Image Format Converter Tool</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #eef2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      background: #1e3a8a;
+      color: #fff;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .tool-container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+
+    input[type="file"],
+    select,
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #16a34a;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #15803d;
+    }
+
+    .output {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .output img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .output a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #1e3a8a;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .ads {
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .tool-container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>AI Image Format Converter</h1>
+    <p>Convert and Optimise Images to WebP, JPEG, PNG with Ease</p>
+  </header>
+
+  <div class="tool-container">
+    <label for="imageUpload">Choose Image File:</label>
+    <input type="file" id="imageUpload" accept="image/*">
+
+    <label for="qualitySelect">Optimisation Level:</label>
+    <select id="qualitySelect">
+      <option value="1">High</option>
+      <option value="0.6">Medium</option>
+      <option value="0.3">Low</option>
+    </select>
+
+    <label for="formatSelect">Convert To Format:</label>
+    <select id="formatSelect">
+      <option value="image/jpeg">JPEG</option>
+      <option value="image/png">PNG</option>
+      <option value="image/webp">WebP</option>
+    </select>
+
+    <button onclick="convertImage()">Convert Image</button>
+
+    <div class="output" id="output"></div>
+
+    <div class="ads">
+      <!-- Google AdSense Unit -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <script>
+    function convertImage() {
+      const fileInput = document.getElementById('imageUpload');
+      const format = document.getElementById('formatSelect').value;
+      const quality = parseFloat(document.getElementById('qualitySelect').value);
+      const output = document.getElementById('output');
+
+      if (!fileInput.files.length) {
+        alert('Please select an image file.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const dataUrl = canvas.toDataURL(format, quality);
+
+          output.innerHTML = `
+            <p><strong>Preview:</strong></p>
+            <img src="${dataUrl}" alt="Converted Image Preview">
+            <br><a href="${dataUrl}" download="converted-image.${format.split('/')[1]}">Download Image</a>
+          `;
+        }
+      }
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  </script>
+</body>
+
+</html>
